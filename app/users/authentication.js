@@ -5,11 +5,10 @@ angular.module('issueTracker.users.authentication', [])
 		'$q',
 		'$http',
 		'$cookies',
-		'$location',
 		'$rootScope',
 		'BASE_URL',
 		'identity',
-		function ($q, $http, $cookies, $location, $rootScope, BASE_URL, identity) {
+		function ($q, $http, $cookies, $rootScope, BASE_URL, identity) {
 
 			var AUTHENTICATION_COOKIE_KEY = 'AuthToken';
 
@@ -63,7 +62,6 @@ angular.module('issueTracker.users.authentication', [])
 			}
 
 			function checkIsAuthenticated() {
-				console.log(!!$cookies.get(AUTHENTICATION_COOKIE_KEY));
 				return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
 			}
 
