@@ -4,8 +4,8 @@ angular.module('issueTracker.dashboard', [])
 
 	.config(['$routeProvider', function ($routeProvider) {
 		var routeChecks = {
-			authenticated: ['$q', 'authentication', function ($q, authentication) {
-				if (authentication.isAuthenticated()) {
+			authenticated: ['$q', '$rootScope', function ($q, $rootScope) {
+				if ($rootScope.isAuthenticated) {
 					return $q.when(true);
 				}
 

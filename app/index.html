@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="app.css">
 	<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body ng-controller="MainCtrl" ng-cloak>
+<body ng-controller="MainCtrl">
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -36,7 +36,7 @@
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul ng-if="isAuthenticated" class="nav navbar-nav">
+			<ul ng-show="isAuthenticated" class="nav navbar-nav">
 				<li>
 					<a href="#/projects">Projects</a>
 				</li>
@@ -47,7 +47,7 @@
 					<a href="#/profile/password">Change Password</a>
 				</li>
 				<li>
-					<a href="#/logout">Logout</a>
+					<a href="#/" ng-click="logout()">Logout</a>
 				</li>
 			</ul>
 		</div>

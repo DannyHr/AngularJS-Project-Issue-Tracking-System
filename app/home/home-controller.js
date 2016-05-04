@@ -4,8 +4,8 @@ angular.module('issueTracker.home', [])
 
 	.config(['$routeProvider', function ($routeProvider) {
 		var routeChecks = {
-			authenticated: ['$q', 'authentication', function ($q, authentication) {
-				if (!authentication.isAuthenticated()) {
+			authenticated: ['$q', '$rootScope', function ($q, $rootScope) {
+				if (!$rootScope.isAuthenticated) {
 					return $q.when(true);
 				}
 
@@ -35,7 +35,8 @@ angular.module('issueTracker.home', [])
 
 			$scope.register = function (userData) {
 				authentication.registerUser(userData)
-					.then(function (registeredUser) {
+					.then(function (loggedUser) {
+						$scope.login(userData);
 						$location.path('/dashboard');
 					})
 			};

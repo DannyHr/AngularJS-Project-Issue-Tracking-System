@@ -1,12 +1,16 @@
 angular.module('issueTracker.common', [])
 	.controller('MainCtrl', [
 		'$scope',
-		'identity',
-		function ($scope, identity) {
-			identity.getCurrentUser()
-				.then(function (response) {
-					$scope.currentUser = response;
-					$scope.isAuthenticated = true;
-				})
+		'$location',
+		'$rootScope',
+		'authentication',
+		function ($scope, $location, $rootScope, authentication) {
+			$rootScope.isAuthenticated = authentication.checkIsAuthenticated();
+			console.log($rootScope.isAuthenticated);
+
+			$scope.logout = function () {
+				$location.path('/');
+				authentication.logoutUser();
+			}
 		}
 	]);

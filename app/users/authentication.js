@@ -6,9 +6,10 @@ angular.module('issueTracker.users.authentication', [])
 		'$http',
 		'$cookies',
 		'$location',
+		'$rootScope',
 		'BASE_URL',
 		'identity',
-		function ($q, $http, $cookies, $location, BASE_URL, identity) {
+		function ($q, $http, $cookies, $location, $rootScope, BASE_URL, identity) {
 
 			var AUTHENTICATION_COOKIE_KEY = 'AuthToken';
 
@@ -29,7 +30,10 @@ angular.module('issueTracker.users.authentication', [])
 				var loginUserData = 'username=' + userData.Email + '&password=' + userData.Password + '&grant_type=password';
 				$http.post(BASE_URL + 'api/Token', loginUserData, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
 					.then(function (response) {
+						console.log('Successfully logged in');
 						preserveUserData(response.data);
+
+						$rootScope.isAuthenticated = true;
 
 						identity.requestCurrentUserProfile()
 							.then(function (response) {
@@ -45,7 +49,8 @@ angular.module('issueTracker.users.authentication', [])
 
 				$http.post(BASE_URL + 'api/Account/Register', userData)
 					.then(function (response) {
-						loginUser(userData);
+						console.log('Successfully registered');
+						deferred.resolve(response);
 					});
 
 				return deferred.promise;
@@ -53,18 +58,17 @@ angular.module('issueTracker.users.authentication', [])
 
 			function logoutUser() {
 				removeUserData();
-
+				$rootScope.isAuthenticated = false;
 				identity.removeUserProfile();
-
-				$location.path('/');
 			}
 
-			function isAuthenticated() {
+			function checkIsAuthenticated() {
+				console.log(!!$cookies.get(AUTHENTICATION_COOKIE_KEY));
 				return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
 			}
 
 			function refreshCookie() {
-				if (isAuthenticated()) {
+				if (checkIsAuthenticated()) {
 					$http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
 					identity.requestCurrentUserProfile();
 				}
@@ -74,7 +78,7 @@ angular.module('issueTracker.users.authentication', [])
 				loginUser: loginUser,
 				registerUser: registerUser,
 				logoutUser: logoutUser,
-				isAuthenticated: isAuthenticated,
+				checkIsAuthenticated: checkIsAuthenticated,
 				refreshCookie: refreshCookie
 			}
 		}
