@@ -23,7 +23,11 @@ angular.module('issueTracker.dashboard', [])
 
 	.controller('DashboardCtrl', [
 		'$scope',
-		'authentication',
-		function ($scope) {
-			$scope.loggedUser = 'asd';
+		'identity',
+		function ($scope, identity) {
+			identity.getCurrentUser()
+				.then(function (response) {
+					$scope.loggedUser = response.Username;
+					$scope.loggedUserId = response.Id;
+				});
 		}]);
