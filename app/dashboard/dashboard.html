@@ -1,1 +1,52 @@
-<div>User Logged in {{loggedUser}}, Id: {{loggedUserId}}</div>
+<h2>Dashboard</h2>
+<uib-tabset active="0" justified="false">
+	<uib-tab index="0" heading="Your Assigned Issues">
+		<table class="table table-striped border-except-top">
+			<thead>
+			<tr class="table-first-row">
+				<td>Status</td>
+				<td>Issue Id</td>
+				<td>Title</td>
+				<td>Project - Project ID</td>
+				<td>Due Date</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="assignedIssue in assignedIssues"> <!--ng-click="goToIssue(assignedIssue.Id)"-->
+				<td>{{assignedIssue.Status.Name}}</td>
+				<td>{{assignedIssue.Id}}</td>
+				<td>{{assignedIssue.Title}}</td>
+				<td>{{assignedIssue.Project.Name}} - {{assignedIssue.Project.Id}}</td>
+				<td>{{assignedIssue.DueDate | date:'dd.MM.yyyy'}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</uib-tab>
+</uib-tabset>
+<br>
+<uib-tabset active="0" justified="false">
+	<uib-tab index="0" heading="Your Projects">
+		<div class="border-except-top">
+			<table>
+				<tr>
+					<td>asdasadsasd</td>
+					<td>asdasadsasd</td>
+					<td>asdasadsasd</td>
+					<td>asdasadsasd</td>
+				</tr>
+			</table>
+		</div>
+	</uib-tab>
+	<uib-tab index="1" heading="Your Projects with Assigned Issues">
+		<div class="border-except-top">
+			<table>
+				<tr>
+					<td>asdasadsasd</td>
+					<td>asdasadsasd</td>
+					<td>asdasadsasd</td>
+					<td>asdasadsasd</td>
+				</tr>
+			</table>
+		</div>
+	</uib-tab>
+</uib-tabset>

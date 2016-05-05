@@ -7,7 +7,11 @@ angular.module('issueTracker', [
 		'issueTracker.dashboard',
 		'issueTracker.common',
 		'issueTracker.users.authentication',
-		'issueTracker.users.identity'
+		'issueTracker.users.identity',
+		'issueTracker.issues',
+		'ngAnimate',
+		'ngTouch',
+		'ui.bootstrap'
 	])
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.otherwise({redirectTo: '/404'});

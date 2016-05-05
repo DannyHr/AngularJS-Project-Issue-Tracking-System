@@ -24,10 +24,10 @@ angular.module('issueTracker.dashboard', [])
 	.controller('DashboardCtrl', [
 		'$scope',
 		'identity',
-		function ($scope, identity) {
-			identity.getCurrentUser()
+		'issuesSvc',
+		function ($scope, identity, issuesSvc) {
+			issuesSvc.getCurrentUserIssues()
 				.then(function (response) {
-					$scope.loggedUser = response.Username;
-					$scope.loggedUserId = response.Id;
-				});
+					$scope.assignedIssues = response.Issues;
+				})
 		}]);
