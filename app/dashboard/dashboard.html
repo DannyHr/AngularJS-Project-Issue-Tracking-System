@@ -6,8 +6,9 @@
 			<tr class="table-first-row">
 				<td>Status</td>
 				<td>Issue Id</td>
-				<td>Title</td>
-				<td>Project - Project ID</td>
+				<td>Issue Title</td>
+				<td>Project ID</td>
+				<td>Project Name</td>
 				<td>Due Date</td>
 			</tr>
 			</thead>
@@ -16,7 +17,8 @@
 				<td>{{assignedIssue.Status.Name}}</td>
 				<td>{{assignedIssue.Id}}</td>
 				<td>{{assignedIssue.Title}}</td>
-				<td>{{assignedIssue.Project.Name}} - {{assignedIssue.Project.Id}}</td>
+				<td>{{assignedIssue.Project.Id}}</td>
+				<td>{{assignedIssue.Project.Name}}</td>
 				<td>{{assignedIssue.DueDate | date:'dd.MM.yyyy'}}</td>
 			</tr>
 			</tbody>
