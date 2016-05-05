@@ -30,6 +30,7 @@ angular.module('issueTracker.home', [])
 				authentication.loginUser(userData)
 					.then(function (loggedUser) {
 						$location.path('/dashboard');
+
 					})
 			};
 

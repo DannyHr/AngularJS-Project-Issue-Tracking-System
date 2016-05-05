@@ -6,7 +6,7 @@ angular.module('issueTracker.issues', [])
 		'$q',
 		'BASE_URL',
 		function ($http, $q, BASE_URL) {
-			function getCurrentUserIssues(orderBy, pageSize, pageNumber) {
+			function getCurrentUserIssues(pageSize, pageNumber, orderBy) {
 				var url = BASE_URL + 'Issues/me' +
 					'?orderBy=' + (orderBy || 'DueDate desc') +
 					'&pageSize=' + (pageSize || 10) +

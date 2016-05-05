@@ -9,6 +9,7 @@ angular.module('issueTracker', [
 		'issueTracker.users.authentication',
 		'issueTracker.users.identity',
 		'issueTracker.issues',
+		'issueTracker.projects',
 		'ngAnimate',
 		'ngTouch',
 		'ui.bootstrap'

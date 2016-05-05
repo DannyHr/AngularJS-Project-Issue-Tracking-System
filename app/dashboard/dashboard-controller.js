@@ -25,9 +25,43 @@ angular.module('issueTracker.dashboard', [])
 		'$scope',
 		'identity',
 		'issuesSvc',
-		function ($scope, identity, issuesSvc) {
-			issuesSvc.getCurrentUserIssues()
+		'projectsSvc',
+		function ($scope, identity, issuesSvc, projectsSvc) {
+
+
+			issuesSvc.getCurrentUserIssues(10, 1, 'DueDate desc')
 				.then(function (response) {
 					$scope.assignedIssues = response.Issues;
+					$scope.projectsWithAssignedIssues = [];
+
+					var uniqueProjectIds = [];
+					if (response.Issues.length > 0) {
+						response.Issues.forEach(function (i) {
+							uniqueProjectIds[i.Project.Id] = i.Project.Id;
+						});
+					}
+
+					if (uniqueProjectIds.length > 0) {
+						uniqueProjectIds.forEach(function (id) {
+							projectsSvc.getProjectsById(id)
+								.then(function (response) {
+									$scope.projectsWithAssignedIssues.push(response);
+									console.log($scope.projectsWithAssignedIssues)
+								}, function (error) {
+									console.error(error);
+								});
+						})
+					}
+
+				});
+
+			identity.getCurrentUser()
+				.then(function (currentUser) {
+					projectsSvc.getProjectsByFilter(10, 1, 'Lead.Id="' + currentUser.Id + '"')
+						.then(function (response) {
+
+							console.log(response.Projects);
+							$scope.currentUserLeadProjects = response.Projects;
+						})
 				})
 		}]);
