@@ -1,0 +1,34 @@
+<h2>Project <strong>{{currentProjectName}}</strong> (Id: {{currentProject.Id}})</h2>
+<div class="col-md-5">
+	<h3>Project Details:</h3>
+	<div>
+		<label for="project-name">Name: </label>
+		<input type="text" id="project-name" required="required" ng-model="currentProject.Name"/>
+		<br/>
+		<label for="project-id">Id: </label>
+		<input type="number" id="project-id" disabled="disabled" ng-model="currentProject.Id"/>
+		<br/>
+		<label for="project-description">Description: </label>
+		<input type="text" id="project-description" required="required" ng-model="currentProject.Description"/>
+		<br/>
+		<span><span>Current Labels: </span> <span ng-repeat="label in currentProject.Labels"><span>{{label.Name}}{{$last ? '' : ', '}}</span></span>
+		</span>
+		<br/>
+		<label for="project-labels">Edit Labels**: </label>
+		<input type="text" id="project-labels" ng-model="currentProject.NewLabels"/>
+		<br/>
+		<label for="project-lead-name">Lead By: </label>
+		<input type="text" id="project-lead-name" disabled="disabled" required="required"
+			   ng-model="currentProject.Lead.Username"/>
+		<br/>
+		<span><span>Current Priorities: </span> <span ng-repeat="priority in currentProject.Priorities"><span>{{priority.Name}}{{$last ? '' : ', '}}</span></span>
+		</span>
+		<br/>
+		<label for="project-priorities">Edit Priorities**: </label>
+		<input type="text" id="project-priorities" ng-model="currentProject.NewPriorities"/>
+		<br/><br/>
+		<p><strong>** - separated by space. Leave blank to keep current</strong></p>
+	</div>
+
+	<button class="btn btn-primary" ng-click="editProject()">Edit Project</button>
+</div>

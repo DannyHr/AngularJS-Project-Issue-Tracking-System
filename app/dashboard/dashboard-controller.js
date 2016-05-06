@@ -44,7 +44,7 @@ angular.module('issueTracker.controllers.dashboard', [])
 
 					if (uniqueProjectIds.length > 0) {
 						uniqueProjectIds.forEach(function (id) {
-							projectsSvc.getProjectsById(id)
+							projectsSvc.getProjectById(id)
 								.then(function (response) {
 									$scope.projectsWithAssignedIssues.push(response);
 								}, function (error) {

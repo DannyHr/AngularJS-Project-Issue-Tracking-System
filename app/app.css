@@ -43,7 +43,7 @@ body {
     background-color: lightblue;
 }
 
-.table-row-link:hover {
+.table-striped > tbody > tr:hover {
     cursor: pointer;
     background-color: #e7e7e7;
 }

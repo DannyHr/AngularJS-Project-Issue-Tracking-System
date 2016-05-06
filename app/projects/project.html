@@ -4,6 +4,7 @@
 	<div>
 		<p><span>Name: </span> {{currentProject.Name}}</p>
 		<p><span>Id: </span> {{currentProject.Id}}</p>
+		<p><span>Description: </span> {{currentProject.Description}}</p>
 		<p><span>Labels: </span> <span ng-repeat="label in currentProject.Labels"><span>{{label.Name}}{{$last ? '' : ', '}}</span></span>
 		</p>
 		<p><span>Lead By: </span> {{currentProject.Lead.Username}}</p>
@@ -13,7 +14,7 @@
 	</div>
 
 	<div ng-if="isLead">
-		<button class="btn btn-primary" ng-click="">Edit Project</button>
+		<button class="btn btn-primary" ng-click="goToEditProjectPage()">Edit Project</button>
 		<button class="btn btn-primary" ng-click="">Add New Issue</button>
 	</div>
 </div>

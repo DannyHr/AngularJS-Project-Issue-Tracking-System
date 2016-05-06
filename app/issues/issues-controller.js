@@ -36,7 +36,7 @@ angular.module('issueTracker.controllers.issues', [])
 							$scope.isAssignee = currentUser.Id == response.Assignee.Id;
 							console.log('$scope.isAssignee=' + $scope.isAssignee);
 
-							projectsSvc.getProjectsById($scope.currentIssue.Project.Id)
+							projectsSvc.getProjectById($scope.currentIssue.Project.Id)
 								.then(function (issueProject) {
 									$scope.isProjectLead = issueProject.Lead.Id == currentUser.Id;
 									console.log('$scope.isProjectLead=' + $scope.isProjectLead);

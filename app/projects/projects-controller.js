@@ -23,11 +23,12 @@ angular.module('issueTracker.controllers.projects', [])
 	.controller('ProjectsCtrl', [
 		'$scope',
 		'$routeParams',
+		'$location',
 		'projectsSvc',
 		'issuesSvc',
 		'identity',
-		function ($scope, $routeParams, projectsSvc, issuesSvc, identity) {
-			projectsSvc.getProjectsById($routeParams.id)
+		function ($scope, $routeParams, $location, projectsSvc, issuesSvc, identity) {
+			projectsSvc.getProjectById($routeParams.id)
 				.then(function (response) {
 					$scope.currentProject = response;
 
@@ -46,5 +47,9 @@ angular.module('issueTracker.controllers.projects', [])
 				}, function (error) {
 					console.error(error);
 				})
+
+			$scope.goToEditProjectPage = function () {
+				$location.path('/projects/' + $routeParams.id + '/edit')
+			}
 		}
 	]);

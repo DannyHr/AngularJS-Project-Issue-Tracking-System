@@ -6,6 +6,7 @@ angular.module('issueTracker', [
 		'issueTracker.controllers.home',
 		'issueTracker.controllers.dashboard',
 		'issueTracker.controllers.projects',
+		'issueTracker.controllers.projectEdit',
 		'issueTracker.controllers.issues',
 		'issueTracker.services.issues',
 		'issueTracker.services.projects',
@@ -24,6 +25,8 @@ angular.module('issueTracker', [
 			if (rejection == 'Unauthorized Access') {
 				$location.path('/');
 			} else if (rejection == 'Already Logged') {
+				$location.path('/dashboard');
+			} else if (rejection == 'Not lead') {
 				$location.path('/dashboard');
 			}
 		});
