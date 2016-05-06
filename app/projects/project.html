@@ -1,0 +1,40 @@
+<h2>Project <strong>{{currentProject.Name}}</strong> (Id: {{currentProject.Id}})</h2>
+<div class="col-md-5">
+	<h3>Project Details:</h3>
+	<div>
+		<p><span>Name: </span> {{currentProject.Name}}</p>
+		<p><span>Id: </span> {{currentProject.Id}}</p>
+		<p><span>Labels: </span> <span ng-repeat="label in currentProject.Labels"><span>{{label.Name}}{{$last ? '' : ', '}}</span></span>
+		</p>
+		<p><span>Lead By: </span> {{currentProject.Lead.Username}}</p>
+		<p><span>Priorities: </span> <span ng-repeat="priority in currentProject.Priorities"><span>{{priority.Name}}{{$last ? '' : ', '}}</span></span>
+		</p>
+		<p><span>Project Key: </span> {{currentProject.ProjectKey}}</p>
+	</div>
+
+	<div ng-if="isLead">
+		<button class="btn btn-primary" ng-click="">Edit Project</button>
+		<button class="btn btn-primary" ng-click="">Add New Issue</button>
+	</div>
+</div>
+<div class="col-md-7 border"> <!--Issues-->
+	<h3>Project Issues:</h3>
+	<table class="table table-striped border-except-top">
+		<thead>
+		<tr class="table-first-row">
+			<td class="block">Id</td>
+			<td class="block">Title</td>
+			<td class="block">Status</td>
+			<td class="block">Due Date</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="issue in currentProjectIssues"> <!--ng-click="goToIssue(assignedIssue.Id)"-->
+			<td class="block">{{issue.Id}}</td>
+			<td class="block">{{issue.Title}}</td>
+			<td class="block">{{issue.Status.Name}}</td>
+			<td class="block">{{issue.DueDate | date:'dd.MM.yyyy'}}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

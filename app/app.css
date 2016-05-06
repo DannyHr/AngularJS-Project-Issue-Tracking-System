@@ -42,3 +42,8 @@ body {
 .table-first-row {
     background-color: lightblue;
 }
+
+.table-row-link:hover {
+    cursor: pointer;
+    background-color: #e7e7e7;
+}

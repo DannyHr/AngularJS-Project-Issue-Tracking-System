@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.home', [])
+angular.module('issueTracker.controllers.home', [])
 
 	.config(['$routeProvider', function ($routeProvider) {
 		var routeChecks = {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.dashboard', [])
+angular.module('issueTracker.controllers.dashboard', [])
 
 	.config(['$routeProvider', function ($routeProvider) {
 		var routeChecks = {
@@ -9,7 +9,7 @@ angular.module('issueTracker.dashboard', [])
 					return $q.when(true);
 				}
 
-				console.log('Unauthorized Access');
+				console.error('Unauthorized Access');
 				return $q.reject('Unauthorized Access');
 			}]
 		};
@@ -23,12 +23,11 @@ angular.module('issueTracker.dashboard', [])
 
 	.controller('DashboardCtrl', [
 		'$scope',
+		'$location',
 		'identity',
 		'issuesSvc',
 		'projectsSvc',
-		function ($scope, identity, issuesSvc, projectsSvc) {
-
-
+		function ($scope,$location, identity, issuesSvc, projectsSvc) {
 			issuesSvc.getCurrentUserIssues(10, 1, 'DueDate desc')
 				.then(function (response) {
 					$scope.assignedIssues = response.Issues;
@@ -64,4 +63,12 @@ angular.module('issueTracker.dashboard', [])
 							$scope.currentUserLeadProjects = response.Projects;
 						})
 				})
+
+			$scope.goToProject = function (id) {
+				$location.path('projects/' + id)
+			};
+
+			$scope.goToIssue = function (id) {
+				$location.path('issues/' + id)
+			};
 		}]);

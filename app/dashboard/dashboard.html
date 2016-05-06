@@ -13,7 +13,7 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="assignedIssue in assignedIssues"> <!--ng-click="goToIssue(assignedIssue.Id)"-->
+			<tr class="table-row-link" ng-repeat="assignedIssue in assignedIssues" ng-click="goToIssue(assignedIssue.Id)">
 				<td>{{assignedIssue.Status.Name}}</td>
 				<td>{{assignedIssue.Id}}</td>
 				<td>{{assignedIssue.Title}}</td>
@@ -39,7 +39,8 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="project in currentUserLeadProjects"> <!--ng-click="goToIssue(assignedIssue.Id)"-->
+			<tr class="table-row-link" ng-repeat="project in currentUserLeadProjects"
+				ng-click="goToProject(project.Id)">
 				<td>{{project.Name}}</td>
 				<td>{{project.Id}}</td>
 				<td>{{project.Lead.Username}}</td>
@@ -59,7 +60,8 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="project in projectsWithAssignedIssues"> <!--ng-click="goToIssue(assignedIssue.Id)"-->
+			<tr class="table-row-link" ng-repeat="project in projectsWithAssignedIssues"
+				ng-click="goToProject(project.Id)">
 				<td>{{project.Name}}</td>
 				<td>{{project.Id}}</td>
 				<td>{{project.Lead.Username}}</td>

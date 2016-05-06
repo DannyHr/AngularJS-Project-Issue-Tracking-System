@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.issues', [])
+angular.module('issueTracker.services.issues', [])
 	.factory('issuesSvc', [
 		'$http',
 		'$q',
@@ -24,8 +24,24 @@ angular.module('issueTracker.issues', [])
 				return deferred.promise;
 			}
 
-			return {
-				getCurrentUserIssues: getCurrentUserIssues
+			function getIssuesByProjectId(projectId) {
+				var url = BASE_URL + 'Projects/' + projectId + '/Issues';
+
+				var deferred = $q.defer();
+				$http.get(url)
+					.then(function (success) {
+						deferred.resolve(success.data);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
 			}
+
+			return {
+				getCurrentUserIssues: getCurrentUserIssues,
+				getIssuesByProjectId: getIssuesByProjectId
+			}
+
 		}
 	]);
