@@ -1,0 +1,22 @@
+<h2>Issue <strong>{{currentIssue.Title}}</strong> (#{{currentIssue.Id}})</h2>
+<div class="col-md-5">
+	<h3>Project Details:</h3>
+	<div>
+		<p><span>Title: </span> {{currentIssue.Title}}</p>
+		<p><span>Id: </span> {{currentIssue.Id}}</p>
+		<p><span>Description: </span> {{currentIssue.Description}}</p>
+		<p><span>Assignee: </span> {{currentIssue.Assignee.Username}}</p>
+		<p><span>Due Date:</span> {{currentIssue.DueDate | date:'dd.MM.yyyy'}}</p>
+		<p><span>Status: </span> {{currentIssue.Status.Name}}</p>
+		<p><span>Priority: </span> {{currentIssue.Priority.Name}}</p>
+		<p><span>Labels: </span><span
+				ng-repeat="label in currentIssue.Labels"><span>{{label.Name}}{{$last ? '' : ', '}}</span></span></p>
+		<p><span>Project ID:</span> {{currentIssue.Project.Id}}</p>
+		<p><span>Project Name:</span> {{currentIssue.Project.Name}}</p>
+	</div>
+
+	<div>
+		<button ng-if="isAssignee" class="btn btn-primary" ng-click="">Change Status</button>
+		<button ng-if="isProjectLead" class="btn btn-primary" ng-click="">Edit Issue</button>
+	</div>
+</div>

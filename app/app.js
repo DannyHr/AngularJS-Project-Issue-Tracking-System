@@ -6,6 +6,7 @@ angular.module('issueTracker', [
 		'issueTracker.controllers.home',
 		'issueTracker.controllers.dashboard',
 		'issueTracker.controllers.projects',
+		'issueTracker.controllers.issues',
 		'issueTracker.services.issues',
 		'issueTracker.services.projects',
 		'issueTracker.users.authentication',

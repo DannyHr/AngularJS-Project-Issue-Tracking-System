@@ -24,6 +24,20 @@ angular.module('issueTracker.services.issues', [])
 				return deferred.promise;
 			}
 
+			function getIssuesById(issueId) {
+				var url = BASE_URL + 'Issues/' + issueId;
+
+				var deferred = $q.defer();
+				$http.get(url)
+					.then(function (success) {
+						deferred.resolve(success.data);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+
 			function getIssuesByProjectId(projectId) {
 				var url = BASE_URL + 'Projects/' + projectId + '/Issues';
 
@@ -40,6 +54,7 @@ angular.module('issueTracker.services.issues', [])
 
 			return {
 				getCurrentUserIssues: getCurrentUserIssues,
+				getIssuesById: getIssuesById,
 				getIssuesByProjectId: getIssuesByProjectId
 			}
 
