@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-md-4 col-md-offset-1 border">
+		<h2 class="text-center">Profile Details</h2>
+		<p><span>Username: </span> {{currentUser.Username}}</p>
+		<p><span>Id: </span> {{currentUser.Id}}</p>
+		<p><span>Is Administrator: </span> {{currentUser.isAdmin ? 'Yes' : 'No'}}</p>
+
+	</div>
+
+	<div class="col-md-4 col-md-offset-2 border">
+		<h2 class="text-center">Change Password</h2>
+		<form name="changePasswordForm">
+			<label for="old-password">Old Password</label>
+			<input type="password" required="required" min-length="6" max-length="100" ng-model="data.OldPassword"
+				   id="old-password" class="form-control"/>
+			<br/>
+			<label for="new-password">New Password</label>
+			<input type="password" required="required" min-length="6" max-length="100" ng-model="data.NewPassword"
+				   id="new-password" class="form-control"/>
+			<br/>
+			<label for="reg-confirm-password">Confirm Password</label>
+			<input type="password" required="required" min-length="6" max-length="100"
+				   ng-model="data.ConfirmPassword" id="reg-confirm-password" class="form-control"/>
+			<br/>
+			<button class="btn btn-primary"
+					ng-disabled="changePasswordForm.$invalid || data.NewPassword != data.ConfirmPassword"
+					ng-click="changePassword(data)">Change Password
+			</button>
+		</form>
+	</div>
+</div>

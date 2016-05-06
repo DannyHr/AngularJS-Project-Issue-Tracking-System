@@ -25,6 +25,8 @@ angular.module('issueTracker.users.identity', [])
 						currentUser = response.data;
 						deferred.resolve(currentUser);
 						userProfileDeferred.resolve();
+					}, function (error) {
+						userProfileDeferred.reject(error);
 					});
 
 				return userProfileDeferred.promise;

@@ -38,6 +38,8 @@ angular.module('issueTracker.users.authentication', [])
 							.then(function (response) {
 								deferred.resolve(response);
 							})
+					}, function (error) {
+						deferred.reject(error);
 					});
 
 				return deferred.promise;
@@ -50,6 +52,21 @@ angular.module('issueTracker.users.authentication', [])
 					.then(function (response) {
 						console.log('Successfully registered');
 						deferred.resolve(response);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+
+			function changePassword(data) {
+				var deferred = $q.defer();
+
+				$http.post(BASE_URL + 'api/Account/ChangePassword', data)
+					.then(function (response) {
+						deferred.resolve(response);
+					}, function (error) {
+						deferred.reject(error);
 					});
 
 				return deferred.promise;
@@ -75,6 +92,7 @@ angular.module('issueTracker.users.authentication', [])
 			return {
 				loginUser: loginUser,
 				registerUser: registerUser,
+				changePassword: changePassword,
 				logoutUser: logoutUser,
 				checkIsAuthenticated: checkIsAuthenticated,
 				refreshCookie: refreshCookie
