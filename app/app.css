@@ -47,3 +47,13 @@ body {
     cursor: pointer;
     background-color: #e7e7e7;
 }
+
+.name{
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
+.date {
+    font-size: 0.8em;
+}

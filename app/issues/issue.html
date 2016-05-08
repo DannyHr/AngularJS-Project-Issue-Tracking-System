@@ -1,6 +1,6 @@
 <h2>Issue <strong>{{currentIssue.Title}}</strong> (#{{currentIssue.Id}})</h2>
-<div class="col-md-5">
-	<h3>Project Details:</h3>
+<div class="col-md-7">
+	<h3>Issue Details:</h3>
 	<div>
 		<p><span>Title: </span> {{currentIssue.Title}}</p>
 		<p><span>Id: </span> {{currentIssue.Id}}</p>
@@ -17,6 +17,23 @@
 
 	<div>
 		<button ng-if="isAssignee" class="btn btn-primary" ng-click="showChangeStatusModal()">Change Status</button>
-		<button ng-if="isProjectLead" class="btn btn-primary" ng-click="">Edit Issue</button>
+		<button ng-if="isProjectLead" class="btn btn-primary" ng-click="goToIssueEditPage()">Edit Issue</button>
+	</div>
+</div>
+<div class="col-md-5">
+	<form name="postCommentForm" ng-if="isAssignee || isProjectLead">
+		<label for="issue-comment">Add New Comment: </label>
+		<textarea id="issue-comment" rows="3" required="required" ng-model="newComment.Text"
+				  class="form-control"></textarea>
+		<br/>
+		<button type="button" ng-disabled="postCommentForm.$invalid" ng-click="postComment()"
+				class="btn btn-primary" data-dismiss="modal">Post Comment
+		</button>
+	</form>
+	<h3>Issue Comments:</h3>
+	<div ng-repeat="comment in issueComments">
+		<p class="name">{{comment.Author.Username}}</p>
+		<p class="date">{{comment.CreatedOn.substr(0,10)}}</p>
+		<p class="container">{{comment.Text}}</p>
 	</div>
 </div>

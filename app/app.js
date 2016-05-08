@@ -12,6 +12,7 @@ angular.module('issueTracker', [
 		'issueTracker.controllers.projects',
 		'issueTracker.controllers.projectEdit',
 		'issueTracker.controllers.issues',
+		'issueTracker.controllers.issueEdit',
 		'issueTracker.controllers.profile',
 		'issueTracker.services.users',
 		'issueTracker.services.issues',
@@ -25,11 +26,10 @@ angular.module('issueTracker', [
 	}])
 	.run(['$rootScope', '$location', 'authentication', function ($rootScope, $location, authentication) {
 		$rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
+			console.log(rejection);
 			if (rejection == 'Unauthorized Access') {
 				$location.path('/');
 			} else if (rejection == 'Already Logged') {
-				$location.path('/dashboard');
-			} else if (rejection == 'Not lead') {
 				$location.path('/dashboard');
 			}
 		});

@@ -59,6 +59,16 @@ angular.module('issueTracker.controllers.issues', [])
 					console.error(error);
 				});
 
+			$scope.postComment = function () {
+				var data = {Text: $scope.newComment.Text};
+				issuesSvc.postNewIssueComment($routeParams.id, data)
+					.then(function (response) {
+						console.log(response);
+					}, function (error) {
+						console.error(error);
+					})
+			};
+
 			$scope.changeStatus = function (newStatusId) {
 				issuesSvc.changeStatus($scope.currentIssue.Id, newStatusId)
 					.then(function (response) {

@@ -52,7 +52,6 @@ angular.module('issueTracker.controllers.dashboard', [])
 								});
 						})
 					}
-
 				});
 
 			identity.getCurrentUser()
