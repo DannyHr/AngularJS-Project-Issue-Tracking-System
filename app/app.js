@@ -21,7 +21,8 @@ angular.module('issueTracker', [
 		'issueTracker.services.projects',
 		'issueTracker.users.authentication',
 		'issueTracker.users.identity',
-		'issueTracker.common'
+		'issueTracker.common',
+		'issueTracker.common.footer'
 	])
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.otherwise({redirectTo: '/404'});

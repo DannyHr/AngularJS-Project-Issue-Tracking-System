@@ -91,7 +91,11 @@ angular.module('issueTracker.controllers.issueEdit', [])
 				issuesSvc.editIssue($scope.currentIssue.Id, data)
 					.then(function (respond) {
 						console.log(respond);
+						toastr.success('Issue has been successfully edited.', 'Issue Edited');
 						$route.reload();
+					}, function (error) {
+						toastr.error('Issue couldn\'t be edited. Check console for more information', 'Issue Editing failed');
+						console.error(error);
 					})
 			};
 		}
