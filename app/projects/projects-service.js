@@ -53,10 +53,25 @@ angular.module('issueTracker.services.projects', [])
 				return deferred.promise;
 			}
 
+			function addProject(data) {
+				var url = BASE_URL + 'Projects/';
+
+				var deferred = $q.defer();
+				$http.post(url, data)
+					.then(function (success) {
+						deferred.resolve(success.data);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+
 			return {
 				getProjectsByFilter: getProjectsByFilter,
 				getProjectById: getProjectById,
-				editProjectById: editProjectById
+				editProjectById: editProjectById,
+				addProject: addProject
 			}
 		}
 	]);

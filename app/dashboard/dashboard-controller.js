@@ -99,7 +99,7 @@ angular.module('issueTracker.controllers.dashboard', [])
 			};
 
 			$scope.goToAddNewProjectPage = function () {
-				$location.path('/projects/add');
+				$location.path('/projects-add');
 			};
 
 			$scope.goToAllProjectsPage = function () {

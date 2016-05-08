@@ -12,6 +12,7 @@ angular.module('issueTracker', [
 		'issueTracker.controllers.projects',
 		'issueTracker.controllers.allProjects',
 		'issueTracker.controllers.projectEdit',
+		'issueTracker.controllers.projectAdd',
 		'issueTracker.controllers.issues',
 		'issueTracker.controllers.issueEdit',
 		'issueTracker.controllers.profile',

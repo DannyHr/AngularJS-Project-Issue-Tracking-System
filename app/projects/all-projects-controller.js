@@ -44,7 +44,7 @@ angular.module('issueTracker.controllers.allProjects', [])
 			$scope.getAllProjects();
 
 			$scope.goToAddNewProjectPage = function () {
-				$location.path('/projects/add');
+				$location.path('/projects-add');
 			};
 
 			$scope.goToProject = function (id) {

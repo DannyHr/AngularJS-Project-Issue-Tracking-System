@@ -1,0 +1,30 @@
+<h2>Add New Project</h2>
+<div class="col-sm-6">
+	<h3>Project Details:</h3>
+	<form name="addNewProjectForm">
+		<label for="project-name">Name:</label>
+		<input type="text" id="project-name" required="required" ng-model="newProject.Name" class="form-control"/>
+		<br/>
+		<label for="project-key">Project Key: </label>
+		<input type="text" id="project-key" ng-model="newProject.ProjectKey" class="form-control"/>
+		<br/>
+		<label for="project-description">Description: </label>
+		<input type="text" id="project-description" required="required" ng-model="newProject.Description"
+			   class="form-control"/>
+		<br/>
+		<label for="project-labels">Labels (separated by space): </label>
+		<input type="text" id="project-labels" ng-model="newProject.stringLabels" class="form-control"/>
+		<br/>
+		<label for="project-lead-name">Assignee:
+			<select required="required" id="project-lead-name" ng-model="newProject.Lead.Id"
+					ng-options="user.Id as user.Username for user in allUsers" class="form-control"></select>
+		</label>
+		<br/>
+		<label for="project-priorities">Priorities (separated by space. Leave blank to keep current): </label>
+		<input type="text" id="project-priorities" ng-model="newProject.stringPriorities" class="form-control"/>
+		<br/>
+		<button class="btn btn-primary" ng-disable="addNewProjectForm.$invalid" ng-click="addProject()">Add Project
+		</button>
+	</form>
+
+</div>
