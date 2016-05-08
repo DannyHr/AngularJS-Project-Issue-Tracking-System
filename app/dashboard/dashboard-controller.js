@@ -23,51 +23,86 @@ angular.module('issueTracker.controllers.dashboard', [])
 
 	.controller('DashboardCtrl', [
 		'$scope',
+		'$rootScope',
 		'$location',
 		'identity',
 		'issuesSvc',
 		'projectsSvc',
-		function ($scope, $location, identity, issuesSvc, projectsSvc) {
-			issuesSvc.getCurrentUserIssues(10, 1, 'DueDate desc')
-				.then(function (response) {
-					$scope.assignedIssues = response.Issues;
-					$scope.projectsWithAssignedIssues = [];
+		'ITEMS_PER_PAGE',
+		function ($scope, $rootScope, $location, identity, issuesSvc, projectsSvc, ITEMS_PER_PAGE) {
+			$scope.pageParams1 = {
+				'startPage': 1,
+				'pageSize': ITEMS_PER_PAGE
+			};
 
-					console.log($scope.assignedIssues)
+			$scope.pageParams2 = {
+				'startPage': 1,
+				'pageSize': ITEMS_PER_PAGE
+			};
 
-					var uniqueProjectIds = [];
-					if (response.Issues.length > 0) {
-						response.Issues.forEach(function (i) {
-							uniqueProjectIds[i.Project.Id] = i.Project.Id;
-						});
-					}
-
-					if (uniqueProjectIds.length > 0) {
-						uniqueProjectIds.forEach(function (id) {
-							projectsSvc.getProjectById(id)
-								.then(function (response) {
-									$scope.projectsWithAssignedIssues.push(response);
-								}, function (error) {
-									console.error(error);
-								});
-						})
-					}
-				});
+			$scope.pageParams3 = {
+				'startPage': 1,
+				'pageSize': ITEMS_PER_PAGE
+			};
 
 			identity.getCurrentUser()
 				.then(function (currentUser) {
-					projectsSvc.getProjectsByFilter(10, 1, 'Lead.Id="' + currentUser.Id + '"')
-						.then(function (response) {
+					$scope.isAdmin = currentUser.isAdmin;
 
-							$scope.currentUserLeadProjects = response.Projects;
-						})
+					$scope.getCurrentUserIssues = function () {
+						issuesSvc.getCurrentUserIssues($scope.pageParams1.pageSize,
+							$scope.pageParams1.startPage,
+							'DueDate desc')
+							.then(function (response) {
+								$scope.assignedIssues = response.Issues;
+								$scope.assignedIssuesTotalCount = response.TotalCount;
+								$scope.projectsWithAssignedIssues = [];
+
+								var uniqueProjectIds = [];
+								if (response.Issues.length > 0) {
+									response.Issues.forEach(function (i) {
+										uniqueProjectIds[i.Project.Id] = i.Project.Id;
+									});
+								}
+
+								if (uniqueProjectIds.length > 0) {
+									uniqueProjectIds.forEach(function (id) {
+										projectsSvc.getProjectById(id)
+											.then(function (response) {
+												$scope.projectsWithAssignedIssues.push(response);
+											}, function (error) {
+												console.error(error);
+											});
+									})
+								}
+							});
+					};
+					$scope.getCurrentUserIssues();
+
+					$scope.getProjectsLed = function () {
+						projectsSvc.getProjectsByFilter($scope.pageParams2.pageSize, $scope.pageParams2.startPage, 'Lead.Id="' + currentUser.Id + '"')
+							.then(function (response) {
+								$scope.currentUserLeadProjects = response.Projects;
+								$scope.currentUserLeadProjectsTotalCount = response.TotalCount;
+
+							})
+					};
+					$scope.getProjectsLed();
 				});
 
 			$scope.goToProject = function (id) {
-				$location.path('projects/' + id)
+				$location.path('/projects/' + id);
 			};
 
 			$scope.goToIssue = function (id) {
-				$location.path('issues/' + id)
+				$location.path('/issues/' + id);
+			};
+
+			$scope.goToAddNewProjectPage = function () {
+				$location.path('/projects/add');
+			};
+
+			$scope.goToAllProjectsPage = function () {
+				$location.path('/projects');
 			};
 		}]);

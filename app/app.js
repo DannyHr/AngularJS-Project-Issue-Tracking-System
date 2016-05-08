@@ -10,6 +10,7 @@ angular.module('issueTracker', [
 		'issueTracker.controllers.home',
 		'issueTracker.controllers.dashboard',
 		'issueTracker.controllers.projects',
+		'issueTracker.controllers.allProjects',
 		'issueTracker.controllers.projectEdit',
 		'issueTracker.controllers.issues',
 		'issueTracker.controllers.issueEdit',
@@ -34,6 +35,10 @@ angular.module('issueTracker', [
 			}
 		});
 
+		$rootScope.maxSize = 20;
+		$rootScope.itemsPerPage = 10;
+
 		authentication.refreshCookie();
 	}])
+	.constant('ITEMS_PER_PAGE', '10')
 	.constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

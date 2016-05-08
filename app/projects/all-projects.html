@@ -1,0 +1,33 @@
+<h3>All Projects</h3>
+<div>
+	<uib-tabset active="0" justified="false">
+		<uib-tab index="0" heading="Projects You Lead">
+			<table class="table table-striped border-except-top">
+				<thead>
+				<tr class="table-first-row">
+					<td>Project Name</td>
+					<td>Project Id</td>
+					<td>Lead By</td>
+					<td>Project Key</td>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="project in allProjects"
+					ng-click="goToProject(project.Id)">
+					<td>{{project.Name}}</td>
+					<td>{{project.Id}}</td>
+					<td>{{project.Lead.Username}}</td>
+					<td>{{project.ProjectKey}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</uib-tab>
+	</uib-tabset>
+	<uib-pagination total-items="allProjectsTotalCount" ng-model="pageParams.startPage"
+					max-size="maxSize" class="pagination-sm"
+					boundary-links="true" rotate="false" items-per-page="pageParams.pageSize"
+					ng-change="getAllProjects(pageParams.startPage)"
+					ng-if="allProjectsTotalCount > itemsPerPage">
+	</uib-pagination>
+	<button class="btn btn-primary" ng-click="goToAddNewProjectPage()" style="text-align: center">Add New Project</button>
+</div>

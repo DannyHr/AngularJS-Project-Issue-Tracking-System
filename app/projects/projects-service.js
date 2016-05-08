@@ -11,9 +11,8 @@ angular.module('issueTracker.services.projects', [])
 					'?pageSize=' + (pageSize || 10) +
 					'&pageNumber=' + (pageNumber || 1);
 
-				if (filter) {
-					url += ('&filter=' + filter);
-				}
+
+				url += ('&filter=' + (filter || ''));
 
 				var deferred = $q.defer();
 				$http.get(url)

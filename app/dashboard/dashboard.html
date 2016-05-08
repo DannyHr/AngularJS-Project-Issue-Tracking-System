@@ -1,4 +1,9 @@
 <h2>Dashboard</h2>
+<div ng-if="isAdmin" style="text-align: center">
+	<button class="btn btn-primary" ng-click="goToAddNewProjectPage()">Add New Project</button>
+	<button class="btn btn-primary" ng-click="goToAllProjectsPage()">View All Projects</button>
+	<br/>
+</div>
 <uib-tabset active="0" justified="false">
 	<uib-tab index="0" heading="Issues Assigned To You">
 		<table class="table table-striped border-except-top">
@@ -23,6 +28,13 @@
 			</tr>
 			</tbody>
 		</table>
+		<uib-pagination total-items="assignedIssuesTotalCount" ng-model="pageParams1.startPage"
+						max-size="maxSize" class="pagination-sm"
+						boundary-links="true" rotate="false" items-per-page="itemsPerPage"
+						ng-change="getCurrentUserIssues(pageParams1.startPage)"
+						ng-if="assignedIssuesTotalCount > itemsPerPage">
+		</uib-pagination>
+		{{}}
 	</uib-tab>
 </uib-tabset>
 <br>
@@ -48,6 +60,12 @@
 			</tr>
 			</tbody>
 		</table>
+		<uib-pagination total-items="currentUserLeadProjectsTotalCount" ng-model="pageParams2.startPage"
+						max-size="maxSize" class="pagination-sm"
+						boundary-links="true" rotate="false" items-per-page="itemsPerPage"
+						ng-change="getProjectsLed(pageParams2.startPage)"
+						ng-if="currentUserLeadProjectsTotalCount > itemsPerPage">
+		</uib-pagination>
 	</uib-tab>
 	<uib-tab index="1" heading="Projects with Assigned Issues">
 		<table class="table table-striped border-except-top">
