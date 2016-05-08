@@ -8,7 +8,7 @@ angular.module('issueTracker.controllers.profile', [])
 					return $q.when(true);
 				}
 
-				console.error('Unauthorized Access');
+				toastr.warning('You have to login to access this page.', 'Login needed');
 				return $q.reject('Unauthorized Access');
 			}]
 		};

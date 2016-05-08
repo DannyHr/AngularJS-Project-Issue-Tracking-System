@@ -4,11 +4,11 @@ angular.module('issueTracker.controllers.projectAdd', [])
 	.config(['$routeProvider', function ($routeProvider) {
 		var routeChecks = {
 			authenticated: ['$q', '$rootScope', function ($q, $rootScope) {
-				if ($rootScope.isAuthenticated) {
+				if ($rootScope.isAdmin) {
 					return $q.when(true);
 				}
 
-				console.error('Unauthorized Access');
+				toastr.error('You are not authorized to access this page', 'Administrator permissions needed');
 				return $q.reject('Unauthorized Access');
 			}]
 		};
@@ -27,20 +27,8 @@ angular.module('issueTracker.controllers.projectAdd', [])
 		'$location',
 		'usersSvc',
 		'projectsSvc',
-		'issuesSvc',
-		'identity',
-		function ($scope, $q, $routeParams, $location, usersSvc, projectsSvc, issuesSvc, identity) {
+		function ($scope, $q, $routeParams, $location, usersSvc, projectsSvc) {
 			$scope.newProject = {};
-
-			identity.getCurrentUser()
-				.then(function (currentUser) {
-					if (!currentUser.isAdmin) {
-						console.error('Unauthorized Access - You must have administrator permissions');
-						$location.path('/dashboard')
-					}
-
-					return $q.when(true);
-				});
 
 			usersSvc.getAllUsers()
 				.then(function (response) {
@@ -81,9 +69,11 @@ angular.module('issueTracker.controllers.projectAdd', [])
 				projectsSvc.addProject(data)
 					.then(function (response) {
 						console.log(response);
+						toastr.success('Project successfully added.', 'Project Added');
 						$location.path('/projects/' + response.Id);
 					}, function (error) {
 						console.error(error);
+						toastr.error('Project couldn\'t be added. Check console for more information', 'Project Adding');
 					})
 			}
 		}

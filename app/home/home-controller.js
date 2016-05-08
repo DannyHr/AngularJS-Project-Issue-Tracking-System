@@ -9,7 +9,6 @@ angular.module('issueTracker.controllers.home', [])
 					return $q.when(true);
 				}
 
-				console.log('Already Logged In');
 				return $q.reject('Already Logged');
 			}]
 		};
@@ -30,15 +29,21 @@ angular.module('issueTracker.controllers.home', [])
 				authentication.loginUser(userData)
 					.then(function (loggedUser) {
 						$location.path('/dashboard');
-
+						toastr.success('You have successfully logged in.', 'Login');
+					}, function (error) {
+						toastr.error(error.data.error_description, 'Login');
 					})
 			};
 
 			$scope.register = function (userData) {
 				authentication.registerUser(userData)
 					.then(function (loggedUser) {
+						toastr.success('You have successfully registered.', 'Register');
 						$scope.login(userData);
 						$location.path('/dashboard');
+					}, function(error){
+						console.log(error)
+						toastr.error(error.data.ModelState[''][0], 'Register');
 					})
 			};
 		}]);

@@ -92,9 +92,11 @@ angular.module('issueTracker.controllers.projectEdit', [])
 				projectsSvc.editProjectById($routeParams.id, data)
 					.then(function (response) {
 						console.log(response);
+						toastr.success('Project #' + $routeParams.id + ' has been edited successfully', 'Project Edit');
 						$route.reload();
 					}, function (error) {
 						console.error(error);
+						toastr.error('An error has occurred', 'Project Edit');
 					})
 			}
 		}

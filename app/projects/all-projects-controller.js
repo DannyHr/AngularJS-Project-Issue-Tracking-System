@@ -3,16 +3,13 @@
 angular.module('issueTracker.controllers.allProjects', [])
 	.config(['$routeProvider', function ($routeProvider) {
 		var routeChecks = {
-			authenticated: ['$q', 'identity', function ($q, identity) {
-				identity.getCurrentUser()
-					.then(function (response) {
-						if (response.isAdmin) {
-							return $q.when(true);
-						}
+			authenticated: ['$q', '$rootScope', 'identity', function ($q, $rootScope, identity) {
+				if ($rootScope.isAdmin) {
+					return $q.when(true);
+				}
 
-						console.error('You must have administrator privileges to access this page.');
-						return $q.reject('Unauthorized Access');
-					});
+				toastr.error('You are not authorized to access this page', 'Administrator permissions needed');
+				return $q.reject('Unauthorized Access');
 			}]
 		};
 

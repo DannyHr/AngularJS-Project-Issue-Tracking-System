@@ -24,14 +24,15 @@ angular.module('issueTracker.controllers.projects', [])
 		'$scope',
 		'$routeParams',
 		'$location',
+		'$route',
 		'projectsSvc',
 		'issuesSvc',
 		'usersSvc',
 		'identity',
 		'ModalService',
-		function ($scope, $routeParams, $location, projectsSvc, issuesSvc, usersSvc, identity, ModalService) {
-			$scope.editedIssue = {};
-			$scope.editedIssue.stringLabels = '';
+		function ($scope, $routeParams, $location, $route, projectsSvc, issuesSvc, usersSvc, identity, ModalService) {
+			$scope.newIssue = {};
+			$scope.newIssue.stringLabels = '';
 
 			projectsSvc.getProjectById($routeParams.id)
 				.then(function (response) {
@@ -61,33 +62,35 @@ angular.module('issueTracker.controllers.projects', [])
 			usersSvc.getAllUsers()
 				.then(function (response) {
 					$scope.allUsers = response;
-					$scope.editedIssue.AssigneeId = angular.copy($scope.allUsers[0]);
-					$scope.editedIssue.PriorityId = angular.copy($scope.currentProject.Priorities[0]);
+					$scope.newIssue.AssigneeId = angular.copy($scope.allUsers[0]);
+					$scope.newIssue.PriorityId = angular.copy($scope.currentProject.Priorities[0]);
 				}, function (error) {
 					console.error(error)
 				});
 
 			$scope.createIssue = function () {
 				var labels = [];
-				if ($scope.editedIssue.stringLabels) {
-					$scope.editedIssue.stringLabels.split(' ').forEach(function (label) {
+				if ($scope.newIssue.stringLabels) {
+					$scope.newIssue.stringLabels.split(' ').forEach(function (label) {
 						labels.push({Name: label})
 					});
 				}
 
 				var data = {
-					Title: $scope.editedIssue.Title,
-					Description: $scope.editedIssue.Description,
-					DueDate: $scope.editedIssue.DueDate,
+					Title: $scope.newIssue.Title,
+					Description: $scope.newIssue.Description,
+					DueDate: $scope.newIssue.DueDate,
 					ProjectId: $scope.currentProject.Id,
-					AssigneeId: $scope.editedIssue.AssigneeId,
-					PriorityId: $scope.editedIssue.PriorityId,
+					AssigneeId: $scope.newIssue.AssigneeId,
+					PriorityId: $scope.newIssue.PriorityId,
 					Labels: labels
 				};
 
 				issuesSvc.addIssue(data)
 					.then(function (respond) {
 						console.log(respond);
+						toastr.success('Issue successfully added to project #' + $scope.currentProject.Id, 'Issue added');
+						$route.reload();
 						issuesSvc.getIssuesByProjectId($routeParams.id)
 							.then(function (response) {
 								$scope.currentProjectIssues = response;
