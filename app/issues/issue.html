@@ -23,10 +23,10 @@
 <div class="col-md-5">
 	<form name="postCommentForm" ng-if="isAssignee || isProjectLead">
 		<label for="issue-comment">Add New Comment: </label>
-		<textarea id="issue-comment" rows="3" required="required" ng-model="newComment.Text"
+		<textarea id="issue-comment" rows="3" required="required" ng-model="newComment"
 				  class="form-control"></textarea>
 		<br/>
-		<button type="button" ng-disabled="postCommentForm.$invalid" ng-click="postComment()"
+		<button type="button" ng-disabled="postCommentForm.$invalid" ng-click="postComment(newComment)"
 				class="btn btn-primary" data-dismiss="modal">Post Comment
 		</button>
 	</form>

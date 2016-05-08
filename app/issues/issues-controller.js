@@ -59,11 +59,12 @@ angular.module('issueTracker.controllers.issues', [])
 					console.error(error);
 				});
 
-			$scope.postComment = function () {
-				var data = {Text: $scope.newComment.Text};
+			$scope.postComment = function (text) {
+				var data = {Text: text};
 				issuesSvc.postNewIssueComment($routeParams.id, data)
 					.then(function (response) {
 						console.log(response);
+						$route.reload();
 					}, function (error) {
 						console.error(error);
 					})
