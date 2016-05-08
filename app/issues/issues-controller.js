@@ -23,11 +23,12 @@ angular.module('issueTracker.controllers.issues', [])
 	.controller('IssuesCtrl', [
 		'$scope',
 		'$routeParams',
+		'$route',
 		'issuesSvc',
 		'projectsSvc',
 		'identity',
 		'ModalService',
-		function ($scope, $routeParams, issuesSvc, projectsSvc, identity, ModalService) {
+		function ($scope, $routeParams, $route, issuesSvc, projectsSvc, identity, ModalService) {
 			issuesSvc.getIssueById($routeParams.id)
 				.then(function (response) {
 					$scope.currentIssue = response;
@@ -51,9 +52,10 @@ angular.module('issueTracker.controllers.issues', [])
 				});
 
 			$scope.changeStatus = function (newStatusId) {
-				issuesSvc.changeStatus($scope.currentIssue, newStatusId)
+				issuesSvc.changeStatus($scope.currentIssue.Id, newStatusId)
 					.then(function (response) {
 						console.log(response);
+						$route.reload();
 					}, function (error) {
 						console.error(error);
 					})

@@ -1,0 +1,27 @@
+<div class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="closeModal()" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Change Status of Issue #{{currentIssue.Id}}</h4>
+			</div>
+			<form name="changeStatusIssueForm" class="modal-body">
+				<label for="issue-status">New Status:
+					<select id="issue-status" ng-model="newStatusId"
+							ng-options="availableStatus.Id as availableStatus.Name for availableStatus in availableStatuses"
+							class="form-control"></select>
+				</label>
+				<br/>
+				<div class="modal-footer">
+					<button type="button" ng-disabled="changeStatusIssueForm.$invalid"
+							ng-click="changeStatus(newStatusId)"
+							class="btn btn-primary" data-dismiss="modal">Change Status
+					</button>
+					<button type="button" ng-click="closeModal()" class="btn btn-default" data-dismiss="modal">Cancel
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
