@@ -24,7 +24,7 @@ angular.module('issueTracker.services.issues', [])
 				return deferred.promise;
 			}
 
-			function getIssuesById(issueId) {
+			function getIssueById(issueId) {
 				var url = BASE_URL + 'Issues/' + issueId;
 
 				var deferred = $q.defer();
@@ -52,10 +52,25 @@ angular.module('issueTracker.services.issues', [])
 				return deferred.promise;
 			}
 
+			function addIssue(data) {
+				var url = BASE_URL + 'Issues/';
+
+				var deferred = $q.defer();
+				$http.post(url, data)
+					.then(function (success) {
+						deferred.resolve(success);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+
 			return {
 				getCurrentUserIssues: getCurrentUserIssues,
-				getIssuesById: getIssuesById,
-				getIssuesByProjectId: getIssuesByProjectId
+				getIssueById: getIssueById,
+				getIssuesByProjectId: getIssuesByProjectId,
+				addIssue: addIssue
 			}
 
 		}

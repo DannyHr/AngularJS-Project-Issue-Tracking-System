@@ -1,0 +1,45 @@
+<div class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="closeModal()" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Add Issue to Project #{{currentProject.Id}}</h4>
+			</div>
+			<form name="createIssueForm" class="modal-body">
+				<label for="issue-title">Title: </label>
+				<input type="text" id="issue-title" required="required" ng-model="newIssue.Title" class="form-control"/>
+				<br />
+				<label for="issue-description">Description: </label>
+				<textarea id="issue-description" rows="3" required="required" ng-model="newIssue.Description" class="form-control"></textarea>
+				<br />
+				<label for="issue-assignee">Assignee:
+					<select id="issue-assignee" ng-model="newIssue.AssigneeId"
+							ng-options="user.Id as user.Username for user in allUsers" class="form-control"></select>
+				</label>
+				<br />
+				<label for="issue-project">Project Id:
+					<input id="issue-project" disabled="disabled" required="required" ng-model="currentProject.Id" class="form-control"/>
+				</label>
+				<br />
+				<label for="issue-duedate">Due Date:
+					<input id="issue-duedate" type="date" required="required" ng-model="newIssue.DueDate" class="form-control"/>
+				</label>
+				<br />
+				<label for="issue-priority">Priority:
+					<select id="issue-priority" required="required" ng-model="newIssue.PriorityId"
+							ng-options="priority.Id as priority.Name for priority in currentProject.Priorities" class="form-control"></select>
+				</label>
+				<br/>
+				<label for="issue-labels">Labels (separated by space): </label>
+				<input type="text" id="issue-labels" required="required" ng-model="newIssue.stringLabels" class="form-control"/>
+				<br />
+				<div class="modal-footer">
+					<button type="button" ng-disabled="createIssueForm.$invalid" ng-click="createIssue()"
+							class="btn btn-primary" data-dismiss="modal">Create Issue</button>
+					<button type="button" ng-click="closeModal()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

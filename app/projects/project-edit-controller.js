@@ -24,10 +24,11 @@ angular.module('issueTracker.controllers.projectEdit', [])
 		'$scope',
 		'$q',
 		'$routeParams',
+		'$route',
 		'projectsSvc',
 		'issuesSvc',
 		'identity',
-		function ($scope, $q, $routeParams, projectsSvc, issuesSvc, identity) {
+		function ($scope, $q, $routeParams, $route, projectsSvc, issuesSvc, identity) {
 			projectsSvc.getProjectById($routeParams.id)
 				.then(function (response) {
 					$scope.currentProject = response;
@@ -90,6 +91,7 @@ angular.module('issueTracker.controllers.projectEdit', [])
 				projectsSvc.editProjectById($routeParams.id, data)
 					.then(function (response) {
 						console.log(response)
+						$route.reload();
 					}, function (error) {
 						console.error(error);
 					})

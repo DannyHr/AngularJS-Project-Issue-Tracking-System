@@ -3,20 +3,22 @@
 angular.module('issueTracker', [
 		'ngRoute',
 		'ngCookies',
+		'ngAnimate',
+		'ngTouch',
+		'angularModalService',
+		'ui.bootstrap',
 		'issueTracker.controllers.home',
 		'issueTracker.controllers.dashboard',
 		'issueTracker.controllers.projects',
 		'issueTracker.controllers.projectEdit',
 		'issueTracker.controllers.issues',
 		'issueTracker.controllers.profile',
+		'issueTracker.services.users',
 		'issueTracker.services.issues',
 		'issueTracker.services.projects',
 		'issueTracker.users.authentication',
 		'issueTracker.users.identity',
-		'issueTracker.common',
-		'ngAnimate',
-		'ngTouch',
-		'ui.bootstrap'
+		'issueTracker.common'
 	])
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.otherwise({redirectTo: '/404'});

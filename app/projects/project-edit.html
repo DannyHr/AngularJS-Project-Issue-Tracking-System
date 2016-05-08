@@ -1,33 +1,33 @@
 <h2>Project <strong>{{currentProjectName}}</strong> (Id: {{currentProject.Id}})</h2>
-<div class="col-md-5">
+<div class="col-sm-6">
 	<h3>Project Details:</h3>
 	<div>
-		<label for="project-name">Name: </label>
-		<input type="text" id="project-name" required="required" ng-model="currentProject.Name"/>
+		<label for="project-name">Name:</label>
+		<input type="text" id="project-name" required="required" ng-model="currentProject.Name" class="form-control"/>
 		<br/>
 		<label for="project-id">Id: </label>
-		<input type="number" id="project-id" disabled="disabled" ng-model="currentProject.Id"/>
+		<input type="number" id="project-id" disabled="disabled" ng-model="currentProject.Id" class="form-control"/>
 		<br/>
 		<label for="project-description">Description: </label>
-		<input type="text" id="project-description" required="required" ng-model="currentProject.Description"/>
+		<input type="text" id="project-description" required="required" ng-model="currentProject.Description"
+			   class="form-control"/>
 		<br/>
 		<span><span>Current Labels: </span> <span ng-repeat="label in currentProject.Labels"><span>{{label.Name}}{{$last ? '' : ', '}}</span></span>
 		</span>
 		<br/>
-		<label for="project-labels">Edit Labels**: </label>
-		<input type="text" id="project-labels" ng-model="currentProject.NewLabels"/>
+		<label for="project-labels">Edit Labels (separated by space. Leave blank to keep current): </label>
+		<input type="text" id="project-labels" ng-model="currentProject.NewLabels" class="form-control"/>
 		<br/>
 		<label for="project-lead-name">Lead By: </label>
 		<input type="text" id="project-lead-name" disabled="disabled" required="required"
-			   ng-model="currentProject.Lead.Username"/>
+			   ng-model="currentProject.Lead.Username" class="form-control"/>
 		<br/>
 		<span><span>Current Priorities: </span> <span ng-repeat="priority in currentProject.Priorities"><span>{{priority.Name}}{{$last ? '' : ', '}}</span></span>
 		</span>
 		<br/>
-		<label for="project-priorities">Edit Priorities**: </label>
-		<input type="text" id="project-priorities" ng-model="currentProject.NewPriorities"/>
-		<br/><br/>
-		<p><strong>** - separated by space. Leave blank to keep current</strong></p>
+		<label for="project-priorities">Edit Priorities (separated by space. Leave blank to keep current): </label>
+		<input type="text" id="project-priorities" ng-model="currentProject.NewPriorities" class="form-control"/>
+		<br/>
 	</div>
 
 	<button class="btn btn-primary" ng-click="editProject()">Edit Project</button>
