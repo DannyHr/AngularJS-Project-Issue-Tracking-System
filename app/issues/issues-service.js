@@ -80,12 +80,42 @@ angular.module('issueTracker.services.issues', [])
 				return deferred.promise;
 			}
 
+			function editIssue(issueId, data) {
+				var url = BASE_URL + 'Issues/' + issueId;
+
+				var deferred = $q.defer();
+				$http.put(url, data)
+					.then(function (success) {
+						deferred.resolve(success);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+
+			function getIssueComments(issueId) {
+				var url = BASE_URL + 'Issues/' + issueId + '/comments';
+
+				var deferred = $q.defer();
+				$http.get(url)
+					.then(function (success) {
+						deferred.resolve(success.data);
+					}, function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+
 			return {
 				getCurrentUserIssues: getCurrentUserIssues,
 				getIssueById: getIssueById,
 				getIssuesByProjectId: getIssuesByProjectId,
 				addIssue: addIssue,
-				changeStatus: changeStatus
+				changeStatus: changeStatus,
+				editIssue: editIssue,
+				getIssueComments: getIssueComments
 			}
 
 		}

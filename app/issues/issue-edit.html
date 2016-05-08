@@ -1,0 +1,44 @@
+<h2>Project <strong>{{currentIssueTitle}}</strong> (Id: {{currentIssue.Id}})</h2>
+<div class="col-sm-6">
+	<h3>Issue Details:</h3>
+	<form name="issueEditForm">
+		<label for="issue-title">Title:</label>
+		<input type="text" id="issue-title" required="required" ng-model="currentIssue.Title" class="form-control"/>
+		<br/>
+		<label for="issue-id">Id: </label>
+		<input type="number" id="issue-id" required="required" disabled="disabled" ng-model="currentIssueId"
+			   class="form-control"/>
+		<br/>
+		<label for="issue-description">Description: </label>
+		<textarea id="issue-description" rows="3" required="required" ng-model="currentIssue.Description"
+				  class="form-control"></textarea>
+		<br/>
+		<label for="issue-assignee">Assignee:
+			<select required="required" id="issue-assignee" ng-model="currentIssue.AssigneeId"
+					ng-options="user.Id as user.Username for user in allUsers" class="form-control"></select>
+		</label>
+		<br/>
+		<label for="issue-project">Project Id:
+			<input id="issue-project" disabled="disabled" required="required" ng-model="currentIssueProjectId"
+				   class="form-control"/>
+		</label>
+		<br/>
+		<label for="issue-duedate">Due Date:
+			<input id="issue-duedate" type="date" required="required" ng-model="editedIssue.DueDate"
+				   class="form-control"/>
+		</label>
+		<br/>
+		<label for="issue-priority">Priority:
+			<select id="issue-priority" required="required" ng-model="currentIssue.PriorityId"
+					ng-options="priority.Id as priority.Name for priority in currentProject.Priorities"
+					class="form-control"></select>
+		</label>
+		<br/>
+		<label for="issue-labels">Labels (separated by space): </label>
+		<input type="text" id="issue-labels" required="required" ng-model="currentIssue.stringLabels"
+			   class="form-control"/>
+		<br/>
+		<button class="btn btn-primary" ng-disabled="issueEditForm.$invalid" ng-click="editIssue()">Edit Issue</button>
+	</form>
+
+</div>

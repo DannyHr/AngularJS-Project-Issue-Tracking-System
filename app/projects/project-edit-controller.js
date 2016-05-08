@@ -25,26 +25,27 @@ angular.module('issueTracker.controllers.projectEdit', [])
 		'$q',
 		'$routeParams',
 		'$route',
+		'$location',
 		'projectsSvc',
 		'issuesSvc',
 		'identity',
-		function ($scope, $q, $routeParams, $route, projectsSvc, issuesSvc, identity) {
+		function ($scope, $q, $routeParams, $route, $location, projectsSvc, issuesSvc, identity) {
 			projectsSvc.getProjectById($routeParams.id)
 				.then(function (response) {
-					$scope.currentProject = response;
-					$scope.currentProjectName = response.Name;
-					$scope.currentProjectLeadId = response.Lead.Id;
-
 					identity.getCurrentUser()
 						.then(function (currentUser) {
 							$scope.isLead = currentUser.Id == response.Lead.Id;
-							if ($scope.isLead) {
-								return $q.when(true);
+							if (!$scope.isLead) {
+								console.error('Unauthorized Access - You should be project leader');
+								$location.path('/dashboard')
 							}
 
-							console.error('Unauthorized Access - You should be project leader');
-							return $q.reject('Not lead');
-						})
+							return $q.when(true);
+						});
+
+					$scope.currentProject = response;
+					$scope.currentProjectName = response.Name;
+					$scope.currentProjectLeadId = response.Lead.Id;
 				}, function (error) {
 					console.error(error)
 				});
@@ -90,7 +91,7 @@ angular.module('issueTracker.controllers.projectEdit', [])
 
 				projectsSvc.editProjectById($routeParams.id, data)
 					.then(function (response) {
-						console.log(response)
+						console.log(response);
 						$route.reload();
 					}, function (error) {
 						console.error(error);

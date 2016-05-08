@@ -30,8 +30,8 @@ angular.module('issueTracker.controllers.projects', [])
 		'identity',
 		'ModalService',
 		function ($scope, $routeParams, $location, projectsSvc, issuesSvc, usersSvc, identity, ModalService) {
-			$scope.newIssue = {};
-			$scope.newIssue.stringLabels = '';
+			$scope.editedIssue = {};
+			$scope.editedIssue.stringLabels = '';
 
 			projectsSvc.getProjectById($routeParams.id)
 				.then(function (response) {
@@ -45,7 +45,6 @@ angular.module('issueTracker.controllers.projects', [])
 				}, function (error) {
 					console.error(error)
 				});
-
 
 			issuesSvc.getIssuesByProjectId($routeParams.id)
 				.then(function (response) {
@@ -62,27 +61,27 @@ angular.module('issueTracker.controllers.projects', [])
 			usersSvc.getAllUsers()
 				.then(function (response) {
 					$scope.allUsers = response;
-					$scope.newIssue.AssigneeId = angular.copy($scope.allUsers[0]);
-					$scope.newIssue.PriorityId = angular.copy($scope.currentProject.Priorities[0]);
+					$scope.editedIssue.AssigneeId = angular.copy($scope.allUsers[0]);
+					$scope.editedIssue.PriorityId = angular.copy($scope.currentProject.Priorities[0]);
 				}, function (error) {
 					console.error(error)
 				});
 
 			$scope.createIssue = function () {
 				var labels = [];
-				if ($scope.newIssue.stringLabels) {
-					$scope.newIssue.stringLabels.split(' ').forEach(function (label) {
+				if ($scope.editedIssue.stringLabels) {
+					$scope.editedIssue.stringLabels.split(' ').forEach(function (label) {
 						labels.push({Name: label})
 					});
 				}
 
 				var data = {
-					Title: $scope.newIssue.Title,
-					Description: $scope.newIssue.Description,
-					DueDate: $scope.newIssue.DueDate,
+					Title: $scope.editedIssue.Title,
+					Description: $scope.editedIssue.Description,
+					DueDate: $scope.editedIssue.DueDate,
 					ProjectId: $scope.currentProject.Id,
-					AssigneeId: $scope.newIssue.AssigneeId,
-					PriorityId: $scope.newIssue.PriorityId,
+					AssigneeId: $scope.editedIssue.AssigneeId,
+					PriorityId: $scope.editedIssue.PriorityId,
 					Labels: labels
 				};
 

@@ -24,11 +24,12 @@ angular.module('issueTracker.controllers.issues', [])
 		'$scope',
 		'$routeParams',
 		'$route',
+		'$location',
 		'issuesSvc',
 		'projectsSvc',
 		'identity',
 		'ModalService',
-		function ($scope, $routeParams, $route, issuesSvc, projectsSvc, identity, ModalService) {
+		function ($scope, $routeParams, $route, $location, issuesSvc, projectsSvc, identity, ModalService) {
 			issuesSvc.getIssueById($routeParams.id)
 				.then(function (response) {
 					$scope.currentIssue = response;
@@ -49,6 +50,13 @@ angular.module('issueTracker.controllers.issues', [])
 						})
 				}, function (error) {
 					console.error(error)
+				});
+
+			issuesSvc.getIssueComments($routeParams.id)
+				.then(function (response) {
+					$scope.issueComments = response;
+				}, function (error) {
+					console.error(error);
 				});
 
 			$scope.changeStatus = function (newStatusId) {
@@ -72,6 +80,10 @@ angular.module('issueTracker.controllers.issues', [])
 						return modal.close();
 					};
 				})
+			};
+
+			$scope.goToIssueEditPage = function () {
+				$location.path('/issues/' + $scope.currentIssue.Id + '/edit')
 			}
 		}
 	]);
