@@ -1,7 +1,8 @@
-<h3>All Projects</h3>
-<div>
+<div style="text-align: center">
+	<button class="btn btn-primary" ng-click="goToAddNewProjectPage()">Add New Project</button>
+	<br/>
 	<uib-tabset active="0" justified="false">
-		<uib-tab index="0" heading="Projects You Lead">
+		<uib-tab index="0" heading="All Projects">
 			<table class="table table-striped border-except-top">
 				<thead>
 				<tr class="table-first-row">
@@ -29,5 +30,4 @@
 					ng-change="getAllProjects(pageParams.startPage)"
 					ng-if="allProjectsTotalCount > itemsPerPage">
 	</uib-pagination>
-	<button class="btn btn-primary" ng-click="goToAddNewProjectPage()" style="text-align: center">Add New Project</button>
 </div>

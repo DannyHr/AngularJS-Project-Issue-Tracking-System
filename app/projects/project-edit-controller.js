@@ -35,7 +35,7 @@ angular.module('issueTracker.controllers.projectEdit', [])
 					identity.getCurrentUser()
 						.then(function (currentUser) {
 							$scope.isLead = currentUser.Id == response.Lead.Id;
-							if (!$scope.isLead) {
+							if (!$scope.isLead && !currentUser.isAdmin) {
 								console.error('Unauthorized Access - You should be project leader');
 								$location.path('/dashboard')
 							}

@@ -13,7 +13,7 @@
 		<p><span>Project Key: </span> {{currentProject.ProjectKey}}</p>
 	</div>
 
-	<div ng-if="isLead">
+	<div ng-if="isLead || isAdmin">
 		<button class="btn btn-primary" ng-click="goToEditProjectPage()">Edit Project</button>
 		<button class="btn btn-primary" ng-click="showAddIssueModal()">Add New Issue</button>
 	</div>

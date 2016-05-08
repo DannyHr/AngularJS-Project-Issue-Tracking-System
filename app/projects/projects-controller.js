@@ -40,7 +40,7 @@ angular.module('issueTracker.controllers.projects', [])
 					identity.getCurrentUser()
 						.then(function (currentUser) {
 							$scope.isLead = currentUser.Id == response.Lead.Id;
-							console.log($scope.isLead)
+							$scope.isAdmin = currentUser.isAdmin;
 						})
 				}, function (error) {
 					console.error(error)
